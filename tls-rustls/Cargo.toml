@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 rustls = { version = "0.20.7", features = ["dangerous_configuration"]}
-custom-utils = { version = "0.10.11", features = ["tls"]}
+custom-utils = { version = "0.10.12", features = ["tls"]}
 anyhow = "1.0.66"
 tokio = { version ="1.21.2", features = ["net", "macros", "rt-multi-thread"]}
 

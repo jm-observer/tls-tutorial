@@ -1,10 +1,11 @@
 use anyhow::Result;
+use custom_utils::logger::LevelFilter::Trace;
 use std::net::TcpStream;
 use std::sync::Arc;
 use tls_rustls::complete_prior_io;
 
 pub fn main() -> Result<()> {
-    custom_utils::logger::logger_stdout_debug();
+    custom_utils::logger::logger_stdout(Trace);
     let root_store =
         custom_utils::tls::init_root_certs_by_path("./resources/emqx-mqtt/broker.emqx.io-ca.crt")?;
     let config = rustls::ClientConfig::builder()

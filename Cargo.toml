@@ -2,5 +2,5 @@
 members = ["tls-openssl", "tls-rustls"]
 
 
-[patch.crates-io]
-custom-utils = {path = "../custom-utils" }
+#[patch.crates-io]
+#custom-utils = {path = "../custom-utils" }
