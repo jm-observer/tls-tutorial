@@ -25,18 +25,29 @@ async fn main() -> Result<()> {
     // let root = init_root_certs_by_path("./resources/ecdsa/ca.cert")?;
     // let verifier_to_client = AllowAnyAuthenticatedClient::new(root.clone());
     let verifier_to_client = Arc::new(NoClientAuth);
+    // let server_config = Arc::new(
+    //     ServerConfig::builder()
+    //         .with_cipher_suites(&[
+    //             // TLS1.3 suites
+    //             TLS13_AES_256_GCM_SHA384,
+    //             TLS13_AES_128_GCM_SHA256,
+    //             TLS13_CHACHA20_POLY1305_SHA256,
+    //         ])
+    //         .with_safe_default_kx_groups()
+    //         .with_protocol_versions(&[&TLS13])?
+    //         .with_client_cert_verifier(verifier_to_client)
+    //         // .with_no_client_auth()
+    //         .with_single_cert(
+    //             load_pem_certs_by_path("./resources/ecdsa/end.fullchain")?,
+    //             load_pkcs8_key("./resources/ecdsa/end.key")?,
+    //         )
+    //         .unwrap(),
+    // );
+
     let server_config = Arc::new(
         ServerConfig::builder()
-            .with_cipher_suites(&[
-                // TLS1.3 suites
-                TLS13_AES_256_GCM_SHA384,
-                TLS13_AES_128_GCM_SHA256,
-                TLS13_CHACHA20_POLY1305_SHA256,
-            ])
-            .with_safe_default_kx_groups()
-            .with_protocol_versions(&[&TLS13])?
+            .with_safe_defaults()
             .with_client_cert_verifier(verifier_to_client)
-            // .with_no_client_auth()
             .with_single_cert(
                 load_pem_certs_by_path("./resources/ecdsa/end.fullchain")?,
                 load_pkcs8_key("./resources/ecdsa/end.key")?,
